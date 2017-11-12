@@ -14,30 +14,19 @@ class FeatureGroups
     $feature_groups = FeatureGroup::orderBy('percentage','DESC')->get();
 
     foreach ($feature_groups as $key=>&$value) {
-
-      if ($key == 0 ) {
-        $value->lower_limit = (int) $value->percentage;
-        $this->limits[$value->id] = $value->lower_limit;
-        continue;
-      }
-
-      $value->lower_limit = $feature_groups[$key-1]->lower_limit + $value->percentage;
+      $value->lower_limit = isset ($feature_groups[$key-1]) ? $feature_groups[$key-1]->lower_limit + $value->percentage : $value->percentage;
       $this->limits[$value->id] = $value->lower_limit;
     }
 
   }
 
   public function assignFeatureGroup() {
-
-    $mt_rand = rand(1,100);
+    $rand = random_int(1,100); //using more evenly distributed random number generator
     foreach ($this->limits as $key => $value) {
       if ($rand<=$value) {
         return $key;
       }
     }
-
-    return 0;
-
   }
 
 
