@@ -48,6 +48,8 @@ class MakeAssignments extends Command {
     /**
      * Execute the console command.
      *
+     * @TODO move logic out of command
+     *
      * @return void
      */
     public function handle($input, $output=NULL)
@@ -79,7 +81,7 @@ class MakeAssignments extends Command {
             return;
         }
 
-        /* Load Customers into database and assign radnommly to feature group*/
+        /* Load Customers into database and assign randomly to feature group*/
 
         $featureGroups = new FeatureGroups();
         foreach ($data->customers as $customer) {

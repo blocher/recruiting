@@ -25,13 +25,9 @@
 * Outputs string result
 
 ### Relevant Files
-* `app\Console\Commands\CheckCustomerFeature.php` contains the command to check if a customer has access to a feature
-* `app\Console\Commands\MakeAssignments.php` contains the command to load data and assign users to feature groups
-* `app\Customer.php` is the Customer model, the `hasFeature` function allows checking to see if Custer has access to a feature
-* `app\Feature.php` is the Feature model
-* `app\FeatureGroup.php` is the FeatureGroup model
-* `app\FeatureGroups.php` allows you to work with the complete collection of FeatureGroups and manages chance of assignment to a particular group
-
+* `app\Console\Commands\` contains the commands described above
+* `app\` contains the models
+* `database\migrations\' contains the database migrations
 
 ### Notes
 * Data is stored in a sqllite database that is committed to the repo for convenience of this demo only
