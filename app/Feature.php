@@ -10,9 +10,23 @@ class Feature extends Model
     'name',
   ];
 
+    /**
+     * Belongs to Many Relationship for feature groups that Feature belongs to
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+
     public function feature_groups() {
       return $this->belongsToMany('App\FeatureGroup', 'features_feature_groups', 'feature_id', 'feature_group_id');
     }
+
+     /**
+     * Return an instance of Fetaure given a features's `id` or `name`
+     *
+     * @param mixed $input (Integer for `id` or string from `name`)
+     *
+     * @return \App\Feature
+     */
 
     public static function getByUserInput($input) {
 

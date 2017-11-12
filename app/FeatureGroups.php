@@ -9,7 +9,20 @@ class FeatureGroups
 
   private $limits = [];
 
+  /**
+   * Constructor, calls setLimits function
+   */
   public function __construct() {
+    $this->setLimits();
+  }
+
+  /**
+   * Sets limits used to assingn boundarides for each feature group based
+   * on percentage chance of feature group being assigned to customer
+   *
+   * @return void
+   */
+  protected function setLimits() {
 
     $feature_groups = FeatureGroup::orderBy('percentage','DESC')->get();
 
@@ -20,6 +33,12 @@ class FeatureGroups
 
   }
 
+  /**
+   * Returns the id of a feature group randomally selected based on the precentage chance each
+   * group has to be selected
+   *
+   * @return int The id of the feature group being assigned
+   */
   public function assignFeatureGroup() {
     $rand = random_int(1,100); //using more evenly distributed random number generator
     foreach ($this->limits as $key => $value) {
