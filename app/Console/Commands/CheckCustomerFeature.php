@@ -10,6 +10,11 @@ use App\FeatureGroup;
 
 use App\FeatureGroups;
 
+/**
+* Command accepts a Feature id or name and a customer id or name and
+* evaluates wheter customer has access to this feature
+*
+*/
 class CheckCustomerFeature extends Command {
 
     /**
@@ -38,10 +43,13 @@ class CheckCustomerFeature extends Command {
         $feature = Feature::getByUserInput($this->option('feature'));
 
         if (empty($customer) || empty($feature)) {
-            throw new \Exception('You must enter a valid customer id or name and a valid feature id or name');
+            $this->error('You must enter a valid customer id or name and a valid feature id or name');
+            return;
         }
 
-        echo $customer->hasFeature($feature->id) ? 'The customer has this feature' : 'The customer does NOT have this feature';
+        $res = $customer->hasFeature($feature->id) ? 'The customer has this feature' : 'The customer does NOT have this feature';
+
+        $this->info($res);
 
 
 
